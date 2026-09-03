@@ -3,177 +3,202 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#12263f" />
-    <meta
-      name="description"
-      content="Kudos IMR: un espacio interno para reconocer aportes concretos entre compañeros."
-    />
+    <meta name="theme-color" content="#dd183b" />
+    <meta name="description" content="Kudos IMR: reconocimiento que se convierte en aprendizaje y acción." />
     <title>Kudos IMR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="app-shell">
       <header class="topbar">
         <a class="brand" href="#muro" aria-label="Kudos IMR, ir al muro">
-          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="brand-name">IMR</span>
+          <img src="https://imrconsulting.com/wp-content/uploads/2025/08/13-logo-rojo-sin-pie-1-5-239x300.png" alt="IMR" />
+          <span class="brand-divider" aria-hidden="true"></span>
           <span class="brand-product">Kudos</span>
         </a>
 
         <nav class="primary-nav" aria-label="Navegación principal">
           <button class="nav-link is-active" type="button" data-view="muro">Muro</button>
           <button class="nav-link" type="button" data-view="mios">Mis kudos</button>
+          <button class="nav-link admin-link" type="button" data-view="reportes">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9m6 10V5m6 14v-7m4 7H2"/></svg>
+            Reportes
+          </button>
         </nav>
 
         <div class="profile">
-          <div class="profile-copy">
-            <strong>Jesús Machado</strong>
-            <span>Consultoría</span>
-          </div>
+          <div class="profile-copy"><strong>Jesús Machado</strong><span>Administrador</span></div>
           <span class="avatar avatar-me" aria-hidden="true">JM</span>
         </div>
       </header>
 
-      <main id="muro">
-        <section class="intro-row" aria-labelledby="page-title">
-          <div>
-            <p class="eyebrow">Reconocimiento entre personas</p>
-            <h1 id="page-title">Lo que vale, se reconoce.</h1>
+      <main>
+        <section class="recognition-view" id="recognition-view">
+          <div class="intro-row">
+            <div>
+              <p class="eyebrow">Reconocimiento entre personas</p>
+              <h1>Lo que vale, se reconoce.</h1>
+            </div>
+            <p class="intro-note">Un aporte concreto puede cambiar el resultado.<br />Reconocelo cuando todavía está fresco.</p>
           </div>
-          <p class="intro-note">
-            Un gesto concreto puede cambiarle el día a alguien.<br />
-            Contalo cuando todavía está fresco.
-          </p>
+
+          <div class="workspace">
+            <aside class="composer-card" id="reconocer" aria-labelledby="composer-title">
+              <div class="composer-heading">
+                <span class="composer-number" aria-hidden="true">+</span>
+                <div><p class="eyebrow eyebrow-light">Nueva tarjeta</p><h2 id="composer-title">Creá un Kudo</h2></div>
+              </div>
+
+              <form id="kudo-form" novalidate>
+                <div class="field-group">
+                  <label for="recipient">Persona o equipo</label>
+                  <div class="select-wrap">
+                    <select id="recipient" name="recipient" required>
+                      <option value="">Elegí a quién reconocer</option>
+                      <optgroup label="Reconocimiento colectivo">
+                        <option value="team-imr">Equipo IMR · Toda la compañía</option>
+                        <option value="team-management">Equipo de Gestión · LDR, MGR y PTR</option>
+                      </optgroup>
+                      <optgroup label="Personas · datos simulados">
+                        <option value="p-valentina">Valentina Ríos · Planificación</option>
+                        <option value="p-nicolas">Nicolás Paz · Integridad</option>
+                        <option value="p-camila">Camila Silva · Datos y tecnología</option>
+                        <option value="p-martin">Martín Acosta · Confiabilidad</option>
+                        <option value="p-sofia">Sofía Luna · Administración</option>
+                      </optgroup>
+                    </select>
+                    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg>
+                  </div>
+                  <p class="field-error">Elegí una persona o un equipo.</p>
+                </div>
+
+                <div class="field-group">
+                  <label for="context">Proyecto o contexto</label>
+                  <div class="select-wrap">
+                    <select id="context" name="context" required disabled>
+                      <option value="">Primero elegí una persona o equipo</option>
+                    </select>
+                    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg>
+                  </div>
+                  <p class="field-hint">Vas a ver los contextos vinculados a esa persona o equipo.</p>
+                  <p class="field-error">Elegí el proyecto o contexto del aporte.</p>
+                </div>
+
+                <fieldset class="field-group category-fieldset">
+                  <legend>¿Qué aporte viste?</legend>
+                  <div class="category-grid">
+                    <label class="category-choice"><input type="radio" name="category" value="Dar una mano" checked /><span class="category-icon">↗</span><span>Dar una mano</span></label>
+                    <label class="category-choice"><input type="radio" name="category" value="Hacer que pase" /><span class="category-icon">✓</span><span>Hacer que pase</span></label>
+                    <label class="category-choice"><input type="radio" name="category" value="Compartir lo que sé" /><span class="category-icon">◎</span><span>Compartir lo que sé</span></label>
+                    <label class="category-choice"><input type="radio" name="category" value="Cuidar el vínculo" /><span class="category-icon">◇</span><span>Cuidar el vínculo</span></label>
+                  </div>
+                </fieldset>
+
+                <div class="field-group">
+                  <div class="label-row"><label for="message">Contá qué hizo</label><span id="char-count">0 / 320</span></div>
+                  <textarea id="message" name="message" rows="5" maxlength="320" required placeholder="Describí el aporte y por qué fue valioso para el proyecto, el equipo o el resultado…"></textarea>
+                  <p class="field-hint">Cuanto más concreto, más significativo.</p>
+                  <p class="field-error">Contá el gesto en al menos 20 caracteres.</p>
+                </div>
+
+                <div class="visibility-row">
+                  <div><strong>Compartir en el muro</strong><span>Visible para toda IMR</span></div>
+                  <label class="switch"><input type="checkbox" id="is-public" checked /><span aria-hidden="true"></span><em>Publicar en el muro</em></label>
+                </div>
+
+                <button class="submit-button" type="submit"><span>Enviar reconocimiento</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
+                <p class="privacy-note">Si no lo compartís, solo lo recibirá la persona.</p>
+              </form>
+            </aside>
+
+            <section class="wall" aria-labelledby="wall-title">
+              <div class="wall-header">
+                <div><p class="eyebrow" id="view-eyebrow">Historias, no rankings</p><h2 id="wall-title">Lo que estamos valorando</h2></div>
+                <button class="mobile-compose" type="button" id="mobile-compose">+ Reconocer</button>
+              </div>
+              <div class="filter-row" role="group" aria-label="Filtrar reconocimientos">
+                <button class="filter-pill is-active" type="button" data-filter="Todos">Todos</button>
+                <button class="filter-pill" type="button" data-filter="Dar una mano">Dar una mano</button>
+                <button class="filter-pill" type="button" data-filter="Hacer que pase">Hacer que pase</button>
+                <button class="filter-pill" type="button" data-filter="Compartir lo que sé">Compartir lo que sé</button>
+                <button class="filter-pill" type="button" data-filter="Cuidar el vínculo">Cuidar el vínculo</button>
+              </div>
+              <div class="kudo-list" id="kudo-list" aria-live="polite"></div>
+              <div class="empty-state" id="empty-state" hidden><span aria-hidden="true">○</span><h3>Todavía no hay historias acá</h3><p>Probá con otra categoría o escribí la primera.</p></div>
+            </section>
+          </div>
         </section>
 
-        <div class="workspace">
-          <aside class="composer-card" id="reconocer" aria-labelledby="composer-title">
-            <div class="composer-heading">
-              <span class="composer-number" aria-hidden="true">+</span>
-              <div>
-                <p class="eyebrow eyebrow-light">Nueva tarjeta</p>
-                <h2 id="composer-title">¿A quién querés reconocer?</h2>
+        <section class="reporting-view" id="reporting-view" hidden>
+          <div class="report-heading">
+            <div><p class="eyebrow">Consola de administración</p><h1>Del reconocimiento a la acción.</h1><p>Señales para cuidar la cultura, ampliar la participación y convertir aprendizajes en prácticas concretas.</p></div>
+            <span class="demo-badge">Datos simulados · POC</span>
+          </div>
+
+          <div class="report-toolbar" aria-label="Filtros del reporte">
+            <label>Período<select id="report-period"><option>Últimos 90 días</option><option>Últimos 30 días</option><option>Año en curso</option></select></label>
+            <label>Proyecto o contexto<select id="report-context"><option value="all">Toda IMR</option><option value="atlas">Proyecto Atlas</option><option value="horizonte">Proyecto Horizonte</option><option value="equipo">Equipo IMR</option></select></label>
+            <p id="report-scope">Vista consolidada · 128 kudos analizados</p>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card metric-primary"><span>Cobertura</span><strong id="metric-coverage">76%</strong><p id="metric-coverage-note">73 de 96 personas reconocidas</p></article>
+            <article class="metric-card"><span>Reconocimiento cruzado</span><strong id="metric-cross">41%</strong><p>entre proyectos o áreas distintas</p></article>
+            <article class="metric-card"><span>Concentración</span><strong id="metric-concentration">18%</strong><p>de kudos en el 10% más reconocido</p></article>
+            <article class="metric-card"><span>Entre pares</span><strong id="metric-peer">64%</strong><p>sin relación jerárquica directa</p></article>
+          </div>
+
+          <div class="analytics-grid">
+            <article class="analytics-card">
+              <div class="card-heading"><div><span class="mini-label">Patrones culturales</span><h2>¿Qué comportamientos aparecen?</h2></div><span class="period-chip">128 kudos</span></div>
+              <div class="bar-chart">
+                <div class="bar-row"><div><span>Hacer que pase</span><strong>38%</strong></div><i><b style="width:38%"></b></i></div>
+                <div class="bar-row"><div><span>Dar una mano</span><strong>29%</strong></div><i><b style="width:29%"></b></i></div>
+                <div class="bar-row"><div><span>Compartir lo que sé</span><strong>21%</strong></div><i><b style="width:21%"></b></i></div>
+                <div class="bar-row"><div><span>Cuidar el vínculo</span><strong>12%</strong></div><i><b style="width:12%"></b></i></div>
               </div>
-            </div>
+            </article>
 
-            <form id="kudo-form" novalidate>
-              <div class="field-group">
-                <label for="recipient">Persona</label>
-                <div class="select-wrap">
-                  <select id="recipient" name="recipient" required>
-                    <option value="">Buscá o elegí a alguien</option>
-                    <option value="Valentina Ríos|VR|Planificación">Valentina Ríos · Planificación</option>
-                    <option value="Nicolás Paz|NP|Integridad">Nicolás Paz · Integridad</option>
-                    <option value="Camila Silva|CS|Datos y tecnología">Camila Silva · Datos y tecnología</option>
-                    <option value="Martín Acosta|MA|Confiabilidad">Martín Acosta · Confiabilidad</option>
-                    <option value="Sofía Luna|SL|Administración">Sofía Luna · Administración</option>
-                  </select>
-                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg>
-                </div>
-                <p class="field-error" id="recipient-error">Elegí a la persona que querés reconocer.</p>
+            <article class="analytics-card">
+              <div class="card-heading"><div><span class="mini-label">Participación</span><h2>Cobertura por contexto</h2></div><span class="period-chip">personas únicas</span></div>
+              <div class="bar-chart context-bars">
+                <div class="bar-row"><div><span>Proyecto Atlas</span><strong>82%</strong></div><i><b style="width:82%"></b></i></div>
+                <div class="bar-row"><div><span>GenIA</span><strong>78%</strong></div><i><b style="width:78%"></b></i></div>
+                <div class="bar-row"><div><span>Proyecto Delta</span><strong>71%</strong></div><i><b style="width:71%"></b></i></div>
+                <div class="bar-row"><div><span>Proyecto Horizonte</span><strong>64%</strong></div><i><b style="width:64%"></b></i></div>
               </div>
+            </article>
+          </div>
 
-              <fieldset class="field-group category-fieldset">
-                <legend>¿Qué aporte viste?</legend>
-                <div class="category-grid">
-                  <label class="category-choice category-blue">
-                    <input type="radio" name="category" value="Dar una mano" checked />
-                    <span class="category-icon" aria-hidden="true">↗</span>
-                    <span>Dar una mano</span>
-                  </label>
-                  <label class="category-choice category-orange">
-                    <input type="radio" name="category" value="Hacer que pase" />
-                    <span class="category-icon" aria-hidden="true">✓</span>
-                    <span>Hacer que pase</span>
-                  </label>
-                  <label class="category-choice category-cyan">
-                    <input type="radio" name="category" value="Compartir lo que sé" />
-                    <span class="category-icon" aria-hidden="true">◎</span>
-                    <span>Compartir lo que sé</span>
-                  </label>
-                  <label class="category-choice category-pink">
-                    <input type="radio" name="category" value="Cuidar el vínculo" />
-                    <span class="category-icon" aria-hidden="true">◇</span>
-                    <span>Cuidar el vínculo</span>
-                  </label>
-                </div>
-              </fieldset>
+          <div class="report-section-heading"><div><p class="eyebrow">Decisiones sugeridas</p><h2>Señales y acciones</h2></div><p>Hipótesis para revisar con contexto humano antes de actuar.</p></div>
+          <div class="signal-grid">
+            <article class="signal-card opportunity"><span class="signal-type">Oportunidad</span><h3>Convertir el conocimiento compartido en práctica</h3><p>Los kudos mencionan explicaciones y materiales reutilizables en Atlas y GenIA.</p><div class="suggested-action"><strong>Acción sugerida</strong><span>Organizar una clínica interna de 30 minutos con quienes fueron reconocidos.</span></div><button class="action-button" type="button" data-action="Clínica de conocimiento">Crear acción</button></article>
+            <article class="signal-card attention"><span class="signal-type">Atención</span><h3>Ampliar la cobertura en Horizonte</h3><p>La participación está 12 puntos por debajo del promedio y se concentra en pocas voces.</p><div class="suggested-action"><strong>Acción sugerida</strong><span>Revisar barreras con el equipo e invitar reconocimiento específico entre pares.</span></div><button class="action-button" type="button" data-action="Revisión de cobertura en Horizonte">Crear acción</button></article>
+            <article class="signal-card balance"><span class="signal-type">Balance</span><h3>Sumar la mirada del Equipo de Gestión</h3><p>El reconocimiento ascendente crece, pero la devolución de LDR, MGR y PTR es menor.</p><div class="suggested-action"><strong>Acción sugerida</strong><span>Incluir cinco minutos de reconocimiento concreto en la reunión mensual.</span></div><button class="action-button" type="button" data-action="Ritual de reconocimiento de Gestión">Crear acción</button></article>
+          </div>
 
-              <div class="field-group">
-                <div class="label-row">
-                  <label for="message">Contá qué hizo</label>
-                  <span id="char-count">0 / 320</span>
-                </div>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="5"
-                  maxlength="320"
-                  required
-                  placeholder="Por ejemplo: Te sumaste al cierre cuando el equipo lo necesitaba y ordenaste la información para que pudiéramos decidir a tiempo…"
-                ></textarea>
-                <p class="field-hint">Cuanto más concreto, más significativo.</p>
-                <p class="field-error" id="message-error">Contá el gesto en al menos 20 caracteres.</p>
-              </div>
+          <article class="contribution-card">
+            <div class="contribution-heading"><div><span class="mini-label">Contribuciones para amplificar</span><h2>Personas que activan aprendizajes</h2><p>No es un ranking de desempeño: muestra señales cualitativas para conectar y compartir prácticas.</p></div><span class="principle-chip">Señal, no evaluación</span></div>
+            <div class="table-wrap"><table><thead><tr><th>Persona</th><th>Señal observada</th><th>Contextos</th><th>Voces distintas</th><th>Oportunidad</th></tr></thead><tbody>
+              <tr><td><span class="person-cell"><i>CS</i><b>Camila Silva<small>Datos y tecnología</small></b></span></td><td>Comparte conocimiento</td><td>3</td><td>8</td><td>Facilitar clínica interna</td></tr>
+              <tr><td><span class="person-cell"><i>VR</i><b>Valentina Ríos<small>Planificación</small></b></span></td><td>Hace que pase</td><td>2</td><td>6</td><td>Documentar práctica de cierre</td></tr>
+              <tr><td><span class="person-cell"><i>NP</i><b>Nicolás Paz<small>Integridad</small></b></span></td><td>Colabora entre proyectos</td><td>4</td><td>7</td><td>Conectar equipos con desafíos afines</td></tr>
+            </tbody></table></div>
+          </article>
 
-              <div class="visibility-row">
-                <div>
-                  <strong>Compartir en el muro</strong>
-                  <span>Visible para toda IMR</span>
-                </div>
-                <label class="switch">
-                  <input type="checkbox" id="is-public" checked />
-                  <span aria-hidden="true"></span>
-                  <em>Publicar en el muro</em>
-                </label>
-              </div>
-
-              <button class="submit-button" type="submit">
-                <span>Enviar reconocimiento</span>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-              </button>
-              <p class="privacy-note">Si no lo compartís, solo lo recibirá la persona.</p>
-            </form>
-          </aside>
-
-          <section class="wall" aria-labelledby="wall-title">
-            <div class="wall-header">
-              <div>
-                <p class="eyebrow" id="view-eyebrow">Historias, no rankings</p>
-                <h2 id="wall-title">Lo que estamos valorando</h2>
-              </div>
-              <button class="mobile-compose" type="button" id="mobile-compose">+ Reconocer</button>
-            </div>
-
-            <div class="filter-row" role="group" aria-label="Filtrar reconocimientos">
-              <button class="filter-pill is-active" type="button" data-filter="Todos">Todos</button>
-              <button class="filter-pill" type="button" data-filter="Dar una mano">Dar una mano</button>
-              <button class="filter-pill" type="button" data-filter="Hacer que pase">Hacer que pase</button>
-              <button class="filter-pill" type="button" data-filter="Compartir lo que sé">Compartir lo que sé</button>
-              <button class="filter-pill" type="button" data-filter="Cuidar el vínculo">Cuidar el vínculo</button>
-            </div>
-
-            <div class="kudo-list" id="kudo-list" aria-live="polite"></div>
-
-            <div class="empty-state" id="empty-state" hidden>
-              <span aria-hidden="true">○</span>
-              <h3>Todavía no hay historias acá</h3>
-              <p>Probá con otra categoría o escribí la primera.</p>
-            </div>
-          </section>
-        </div>
+          <aside class="ethics-note"><span aria-hidden="true">i</span><p><strong>Uso responsable.</strong> Estas señales no deben utilizarse de forma aislada para evaluar desempeño, promociones o compensaciones. Orientan conversaciones y acciones que requieren contexto.</p></aside>
+        </section>
       </main>
     </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true">
       <span class="toast-check" aria-hidden="true">✓</span>
-      <div>
-        <strong>Reconocimiento enviado</strong>
-        <p id="toast-message">Tu tarjeta ya es parte del muro.</p>
-      </div>
+      <div><strong id="toast-title">Reconocimiento enviado</strong><p id="toast-message">Tu tarjeta ya es parte del muro.</p></div>
       <button type="button" aria-label="Cerrar notificación" id="toast-close">×</button>
     </div>
-
     <script src="./app.js"></script>
   </body>
 </html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#12263f" />
+    <meta
+      name="description"
+      content="Kudos IMR: un espacio interno para reconocer aportes concretos entre compañeros."
+    />
+    <title>Kudos IMR</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#muro" aria-label="Kudos IMR, ir al muro">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="brand-name">IMR</span>
+          <span class="brand-product">Kudos</span>
+        </a>
+
+        <nav class="primary-nav" aria-label="Navegación principal">
+          <button class="nav-link is-active" type="button" data-view="muro">Muro</button>
+          <button class="nav-link" type="button" data-view="mios">Mis kudos</button>
+        </nav>
+
+        <div class="profile">
+          <div class="profile-copy">
+            <strong>Jesús Machado</strong>
+            <span>Consultoría</span>
+          </div>
+          <span class="avatar avatar-me" aria-hidden="true">JM</span>
+        </div>
+      </header>
+
+      <main id="muro">
+        <section class="intro-row" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">Reconocimiento entre personas</p>
+            <h1 id="page-title">Lo que vale, se reconoce.</h1>
+          </div>
+          <p class="intro-note">
+            Un gesto concreto puede cambiarle el día a alguien.<br />
+            Contalo cuando todavía está fresco.
+          </p>
+        </section>
+
+        <div class="workspace">
+          <aside class="composer-card" id="reconocer" aria-labelledby="composer-title">
+            <div class="composer-heading">
+              <span class="composer-number" aria-hidden="true">+</span>
+              <div>
+                <p class="eyebrow eyebrow-light">Nueva tarjeta</p>
+                <h2 id="composer-title">¿A quién querés reconocer?</h2>
+              </div>
+            </div>
+
+            <form id="kudo-form" novalidate>
+              <div class="field-group">
+                <label for="recipient">Persona</label>
+                <div class="select-wrap">
+                  <select id="recipient" name="recipient" required>
+                    <option value="">Buscá o elegí a alguien</option>
+                    <option value="Valentina Ríos|VR|Planificación">Valentina Ríos · Planificación</option>
+                    <option value="Nicolás Paz|NP|Integridad">Nicolás Paz · Integridad</option>
+                    <option value="Camila Silva|CS|Datos y tecnología">Camila Silva · Datos y tecnología</option>
+                    <option value="Martín Acosta|MA|Confiabilidad">Martín Acosta · Confiabilidad</option>
+                    <option value="Sofía Luna|SL|Administración">Sofía Luna · Administración</option>
+                  </select>
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg>
+                </div>
+                <p class="field-error" id="recipient-error">Elegí a la persona que querés reconocer.</p>
+              </div>
+
+              <fieldset class="field-group category-fieldset">
+                <legend>¿Qué aporte viste?</legend>
+                <div class="category-grid">
+                  <label class="category-choice category-blue">
+                    <input type="radio" name="category" value="Dar una mano" checked />
+                    <span class="category-icon" aria-hidden="true">↗</span>
+                    <span>Dar una mano</span>
+                  </label>
+                  <label class="category-choice category-orange">
+                    <input type="radio" name="category" value="Hacer que pase" />
+                    <span class="category-icon" aria-hidden="true">✓</span>
+                    <span>Hacer que pase</span>
+                  </label>
+                  <label class="category-choice category-cyan">
+                    <input type="radio" name="category" value="Compartir lo que sé" />
+                    <span class="category-icon" aria-hidden="true">◎</span>
+                    <span>Compartir lo que sé</span>
+                  </label>
+                  <label class="category-choice category-pink">
+                    <input type="radio" name="category" value="Cuidar el vínculo" />
+                    <span class="category-icon" aria-hidden="true">◇</span>
+                    <span>Cuidar el vínculo</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="field-group">
+                <div class="label-row">
+                  <label for="message">Contá qué hizo</label>
+                  <span id="char-count">0 / 320</span>
+                </div>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  maxlength="320"
+                  required
+                  placeholder="Por ejemplo: Te sumaste al cierre cuando el equipo lo necesitaba y ordenaste la información para que pudiéramos decidir a tiempo…"
+                ></textarea>
+                <p class="field-hint">Cuanto más concreto, más significativo.</p>
+                <p class="field-error" id="message-error">Contá el gesto en al menos 20 caracteres.</p>
+              </div>
+
+              <div class="visibility-row">
+                <div>
+                  <strong>Compartir en el muro</strong>
+                  <span>Visible para toda IMR</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="is-public" checked />
+                  <span aria-hidden="true"></span>
+                  <em>Publicar en el muro</em>
+                </label>
+              </div>
+
+              <button class="submit-button" type="submit">
+                <span>Enviar reconocimiento</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+              </button>
+              <p class="privacy-note">Si no lo compartís, solo lo recibirá la persona.</p>
+            </form>
+          </aside>
+
+          <section class="wall" aria-labelledby="wall-title">
+            <div class="wall-header">
+              <div>
+                <p class="eyebrow" id="view-eyebrow">Historias, no rankings</p>
+                <h2 id="wall-title">Lo que estamos valorando</h2>
+              </div>
+              <button class="mobile-compose" type="button" id="mobile-compose">+ Reconocer</button>
+            </div>
+
+            <div class="filter-row" role="group" aria-label="Filtrar reconocimientos">
+              <button class="filter-pill is-active" type="button" data-filter="Todos">Todos</button>
+              <button class="filter-pill" type="button" data-filter="Dar una mano">Dar una mano</button>
+              <button class="filter-pill" type="button" data-filter="Hacer que pase">Hacer que pase</button>
+              <button class="filter-pill" type="button" data-filter="Compartir lo que sé">Compartir lo que sé</button>
+              <button class="filter-pill" type="button" data-filter="Cuidar el vínculo">Cuidar el vínculo</button>
+            </div>
+
+            <div class="kudo-list" id="kudo-list" aria-live="polite"></div>
+
+            <div class="empty-state" id="empty-state" hidden>
+              <span aria-hidden="true">○</span>
+              <h3>Todavía no hay historias acá</h3>
+              <p>Probá con otra categoría o escribí la primera.</p>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true">
+      <span class="toast-check" aria-hidden="true">✓</span>
+      <div>
+        <strong>Reconocimiento enviado</strong>
+        <p id="toast-message">Tu tarjeta ya es parte del muro.</p>
+      </div>
+      <button type="button" aria-label="Cerrar notificación" id="toast-close">×</button>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

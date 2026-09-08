@@ -1165,7 +1165,10 @@ function todayISO() {
 
 function formatDate(value, withTime) {
   if (!value) return 'Sin fecha';
-  const parsed = new Date(value);
+  const isDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(value);
+  const parsed = isDateOnly
+    ? new Date(Number(value.slice(0, 4)), Number(value.slice(5, 7)) - 1, Number(value.slice(8, 10)), 12)
+    : new Date(value);
   if (Number.isNaN(parsed.getTime())) return value;
   const options = { day: 'numeric', month: 'short', year: 'numeric' };
   if (withTime) {
@@ -1943,7 +1946,7 @@ function renderActions() {
   dom.actionEmpty.hidden = visible.length > 0;
 }
 
-function showAdminTab(tabName) {
+function showAdminTab(tabName, shouldScroll) {
   activeAdminTab = ['panorama', 'signals', 'recognitions', 'actions'].includes(tabName) ? tabName : 'panorama';
   dom.reportToolbar.hidden = ['recognitions', 'actions'].includes(activeAdminTab);
   dom.adminTabs.forEach(function (button) {
@@ -1960,6 +1963,10 @@ function showAdminTab(tabName) {
   if (activeAdminTab === 'signals') renderSignals();
   if (activeAdminTab === 'recognitions') renderRecognitions();
   if (activeAdminTab === 'actions') renderActions();
+
+  if (shouldScroll) {
+    dom.adminTabs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 function renderAdmin() {
@@ -2678,9 +2685,9 @@ dom.myTabs.forEach(function (button) {
 enableArrowNavigation(dom.myTabs, function (button) { showMyView(button.dataset.myView); });
 
 dom.adminTabs.forEach(function (button) {
-  button.addEventListener('click', function () { showAdminTab(button.dataset.adminTab); });
+  button.addEventListener('click', function () { showAdminTab(button.dataset.adminTab, true); });
 });
-enableArrowNavigation(dom.adminTabs, function (button) { showAdminTab(button.dataset.adminTab); });
+enableArrowNavigation(dom.adminTabs, function (button) { showAdminTab(button.dataset.adminTab, true); });
 
 dom.reportPeriod.addEventListener('change', function () {
   renderPanorama();

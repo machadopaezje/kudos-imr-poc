@@ -826,10 +826,11 @@ textarea {
 .filter-scroll {
   min-width: 0;
   display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
   align-items: center;
   gap: 7px;
-  overflow-x: auto;
-  scrollbar-width: thin;
+  overflow-x: visible;
 }
 
 .filter-pill {
@@ -860,6 +861,10 @@ textarea {
   min-width: 190px;
   min-height: 38px;
   padding: 0 34px 0 11px;
+}
+
+.compact-select {
+  flex: 0 0 auto;
 }
 
 .kudo-list {
@@ -1289,6 +1294,7 @@ textarea {
   position: sticky;
   top: 78px;
   z-index: 16;
+  scroll-margin-top: 78px;
   margin: 0 -1px;
   padding: 0 4px;
   border: 1px solid var(--line);
@@ -2545,6 +2551,12 @@ textarea {
     flex-direction: column;
   }
 
+  .filter-scroll {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
   .compact-select select {
     width: 100%;
   }
@@ -2560,6 +2572,7 @@ textarea {
 
   .admin-tabs {
     top: 66px;
+    scroll-margin-top: 66px;
     overflow-x: auto;
   }
 

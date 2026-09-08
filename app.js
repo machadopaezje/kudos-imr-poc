@@ -2590,6 +2590,7 @@ function handleKudoSubmit(event) {
   persistKudos();
   const isPublic = newKudo.visibility === 'public';
   resetKudoForm();
+  renderAll();
   if (isPublic) {
     showView('muro');
   } else {

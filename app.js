@@ -1325,6 +1325,7 @@ const dom = {
   myKudoList: document.querySelector('#my-kudo-list'),
   myEmptyState: document.querySelector('#my-empty-state'),
   adminTabs: Array.from(document.querySelectorAll('[data-admin-tab]')),
+  adminTablist: document.querySelector('.admin-tabs'),
   adminPanels: Array.from(document.querySelectorAll('.admin-panel')),
   reportToolbar: document.querySelector('#report-toolbar'),
   reportPeriod: document.querySelector('#report-period'),
@@ -1964,8 +1965,8 @@ function showAdminTab(tabName, shouldScroll) {
   if (activeAdminTab === 'recognitions') renderRecognitions();
   if (activeAdminTab === 'actions') renderActions();
 
-  if (shouldScroll) {
-    dom.adminTabs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (shouldScroll && dom.adminTablist) {
+    dom.adminTablist.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 
